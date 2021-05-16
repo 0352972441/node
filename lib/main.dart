@@ -7,6 +7,8 @@ import 'package:note/screens/auth_screen.dart';
 import 'package:note/screens/home_screen.dart';
 
 import 'bloc/auth_bloc.dart';
+import 'bloc/task_bloc.dart';
+import 'cubit/view_mode_cubit.dart';
 
 Future main() async {
   await DotEnv.load(fileName: ".env");
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context)=>LogoutBloc()),
           BlocProvider(create: (context)=> AuthBloc(logoutBloc: BlocProvider.of(context))),
+          BlocProvider(create: (context)=> ViewModeCubit()),
+          BlocProvider(create: (context)=> TaskBloc())
         ],
         child: MaterialApp(
             showSemanticsDebugger: false,
