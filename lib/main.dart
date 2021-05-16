@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
+import 'package:note/bloc/logout_bloc.dart';
 import 'package:note/common/res/authrespostory.dart';
 import 'package:note/screens/auth_screen.dart';
 import 'package:note/screens/home_screen.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthResponstory(),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (cxt)=> AuthBloc())
+          BlocProvider(create: (context)=>LogoutBloc()),
+          BlocProvider(create: (context)=> AuthBloc(logoutBloc: BlocProvider.of(context))),
         ],
         child: MaterialApp(
             showSemanticsDebugger: false,
@@ -29,7 +31,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             darkTheme: ThemeData.light(),
             theme: ThemeData(primarySwatch: Colors.teal),
-            home: AuthScreen()),
+            home: BlocBuilder<LogoutBloc, LogoutState>(builder: (context, state){
+              return state.user != null ? HomeScreen():AuthScreen();
+            },)
+            ),
       ),
     );
   }

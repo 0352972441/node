@@ -16,7 +16,5 @@ class LoginPasswordChanged extends AuthEvent{
 }
 
 class LoginSubmited extends AuthEvent{
-  // String email;
-  // String password;
-  LoginSubmited();
+  
 }

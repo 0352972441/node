@@ -35,7 +35,7 @@ class AuthState{
     FormSubmissionStatus formStatus,
   }) {
     return AuthState(
-      email: email,
+      email: email ?? this.email,
       password: password ?? this.password,
       formStatus: formStatus ?? this.formStatus,
     );
@@ -62,7 +62,7 @@ class FormSubmitting extends FormSubmissionStatus {
 class SubmissionSuccess extends FormSubmissionStatus {}
 
 class SubmissionFailed extends FormSubmissionStatus {
-  final Exception exception;
+  // final Exception exception;
 
-  SubmissionFailed(this.exception);
+  // SubmissionFailed(this.exception);
 }

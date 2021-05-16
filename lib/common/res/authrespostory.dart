@@ -11,8 +11,8 @@ class AuthResponstory{
 
   Future<User> login({String email, String password}) async {
     try{
-      final dataJson =  await _auth.getRawLogin(email:email, password:password);
-      return User.fromMap(dataJson);
+      final dataMap =  await _auth.getRawLogin(email:email, password:password);
+      return User.fromMap(dataMap);
     }catch(e){
       print(e);
     }
